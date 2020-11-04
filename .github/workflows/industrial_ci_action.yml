@@ -1,0 +1,24 @@
+name: CI
+
+on: [push, pull_request]
+
+jobs:
+  industrial_ci:
+    env:
+      CATKIN_LINT: pedantic
+      NOT_TEST_DOWNSTREAM: true
+      PARALLEL_TESTS: true
+      ROS_REPO: ros
+      VERBOSE_OUTPUT: false
+      VERBOSE_TESTS: true
+      UPSTREAM_WORKSPACE: .travis.rosinstall
+    strategy:
+      matrix:
+        env:
+          - {ROS_DISTRO: kinetic}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: 'ros-industrial/industrial_ci@master'
+        env:
+          ${{matrix.env}}

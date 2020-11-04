@@ -1,1 +1,5 @@
 # empty
+- git:
+    local-name: atf
+    uri: git@github.com:floweisshardt/atf
+    version: master
